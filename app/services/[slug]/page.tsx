@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
+import Magnetic from "@/components/Magnetic";
 import { SERVICES, getService } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -37,34 +38,47 @@ export default async function ServiceDetailPage({
 
   return (
     <main>
-      <section style={{ background: "#3b1517", color: "#f2ede4" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "34px 28px 66px" }}>
-          <div style={{ font: "500 11.5px/1 var(--font-mono), monospace", letterSpacing: ".14em", color: "#c9bfb4", marginBottom: 40 }}>
+      <section style={{ background: "#3b1517", color: "#f2ede4", position: "relative", overflow: "hidden" }}>
+        <div className="dot-grid" />
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "34px 28px 66px", position: "relative" }}>
+          <div data-reveal style={{ font: "500 11.5px/1 var(--font-mono), monospace", letterSpacing: ".14em", color: "#c9bfb4", marginBottom: 40 }}>
             <Link href="/services" style={{ cursor: "pointer", color: "#a5ce2b" }}>SERVICES</Link> / {svc.caps}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,.8fr)", gap: 56, alignItems: "end" }}>
+          <div className="detail-hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,.8fr)", gap: 56, alignItems: "end" }}>
             <div>
               <h1
+                data-reveal
+                data-reveal-delay="0.08"
                 style={{
                   margin: "0 0 22px",
-                  font: "600 56px/1.06 var(--font-serif), Georgia, serif",
+                  fontWeight: 600,
+                  fontSize: "clamp(32px, 7vw, 56px)",
+                  lineHeight: 1.06,
+                  fontFamily: "var(--font-serif), Georgia, serif",
                   letterSpacing: "-.02em",
                   textWrap: "pretty",
                 }}
               >
                 {svc.title}
               </h1>
-              <p style={{ margin: 0, maxWidth: 620, font: "400 18px/1.7 var(--font-sans), sans-serif", color: "#ded5c9", textWrap: "pretty" }}>
+              <p
+                data-reveal
+                data-reveal-delay="0.16"
+                style={{ margin: 0, maxWidth: 620, font: "400 18px/1.7 var(--font-sans), sans-serif", color: "#ded5c9", textWrap: "pretty" }}
+              >
                 {svc.intro}
               </p>
             </div>
-            <div style={{ minHeight: 260, borderRadius: 3, overflow: "hidden", position: "relative" }}>
+            <div data-reveal data-reveal-delay="0.1" style={{ minHeight: 260, borderRadius: 3, overflow: "hidden", position: "relative" }}>
               <div
+                data-parallax="8"
                 role="img"
                 aria-label={svc.title}
                 style={{
+                  position: "absolute",
+                  inset: "-12% 0",
                   width: "100%",
-                  height: "100%",
+                  height: "124%",
                   minHeight: 260,
                   backgroundImage: `url(${svc.img})`,
                   backgroundSize: "cover",
@@ -78,8 +92,8 @@ export default async function ServiceDetailPage({
       </section>
 
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 28px 90px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,240px) minmax(0,1fr)", gap: 56, alignItems: "start" }}>
-          <aside style={{ position: "sticky", top: 112, display: "flex", flexDirection: "column", gap: 10 }}>
+        <div className="detail-body-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,240px) minmax(0,1fr)", gap: 56, alignItems: "start" }}>
+          <aside className="detail-sidebar" data-reveal style={{ position: "sticky", top: 112, display: "flex", flexDirection: "column", gap: 10 }}>
             <div style={{ font: "500 10.5px/1 var(--font-mono), monospace", letterSpacing: ".18em", color: "#7b6a66", marginBottom: 6 }}>
               ON THIS PAGE
             </div>
@@ -123,11 +137,12 @@ export default async function ServiceDetailPage({
             </div>
           </aside>
 
-          <div style={{ display: "flex", flexDirection: "column", maxWidth: 760 }}>
+          <div className="detail-content" style={{ display: "flex", flexDirection: "column", maxWidth: 760 }}>
             {sections.map((sec) => (
               <section
                 key={sec.id}
                 id={sec.id}
+                data-reveal
                 style={{
                   padding: "0 0 44px",
                   marginBottom: 44,
@@ -179,6 +194,8 @@ export default async function ServiceDetailPage({
             ))}
 
             <div
+              className="cta-band"
+              data-reveal
               style={{
                 display: "flex",
                 flexWrap: "wrap",
@@ -198,38 +215,44 @@ export default async function ServiceDetailPage({
                 </div>
               </div>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <Link
-                  href="/book"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    whiteSpace: "nowrap",
-                    background: "#a5ce2b",
-                    color: "#2a1214",
-                    padding: "13px 22px",
-                    borderRadius: 2,
-                    font: "700 13.5px/1.3 var(--font-sans), sans-serif",
-                    cursor: "pointer",
-                  }}
-                >
-                  Book a consultation
-                </Link>
-                <Link
-                  href="/contact"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    whiteSpace: "nowrap",
-                    border: "1px solid rgba(242,237,228,.4)",
-                    color: "#f2ede4",
-                    padding: "13px 22px",
-                    borderRadius: 2,
-                    font: "600 13.5px/1.3 var(--font-sans), sans-serif",
-                    cursor: "pointer",
-                  }}
-                >
-                  Send a message
-                </Link>
+                <Magnetic>
+                  <Link
+                    href="/book"
+                    className="btn-animated"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      whiteSpace: "nowrap",
+                      background: "#a5ce2b",
+                      color: "#2a1214",
+                      padding: "13px 22px",
+                      borderRadius: 2,
+                      font: "700 13.5px/1.3 var(--font-sans), sans-serif",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Book a consultation
+                  </Link>
+                </Magnetic>
+                <Magnetic>
+                  <Link
+                    href="/contact"
+                    className="btn-animated"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      whiteSpace: "nowrap",
+                      border: "1px solid rgba(242,237,228,.4)",
+                      color: "#f2ede4",
+                      padding: "13px 22px",
+                      borderRadius: 2,
+                      font: "600 13.5px/1.3 var(--font-sans), sans-serif",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Send a message
+                  </Link>
+                </Magnetic>
               </div>
             </div>
 
@@ -238,11 +261,13 @@ export default async function ServiceDetailPage({
                 OTHER SERVICES
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(210px,1fr))", gap: 14 }}>
-                {others.map((o) => (
+                {others.map((o, i) => (
                   <Link
                     key={o.slug}
                     href={`/services/${o.slug}`}
                     className="hover-lime-border"
+                    data-reveal
+                    data-reveal-delay={(i * 0.08).toFixed(2)}
                     style={{
                       cursor: "pointer",
                       background: "#fff",

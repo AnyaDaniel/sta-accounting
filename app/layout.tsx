@@ -4,6 +4,9 @@ import "./globals.css";
 import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import ScrollReveals from "@/components/ScrollReveals";
+import PageTransition from "@/components/PageTransition";
 
 const sourceSerif = Source_Serif_4({
   variable: "--font-serif",
@@ -38,12 +41,14 @@ export default function RootLayout({
       className={`${sourceSerif.variable} ${karla.variable} ${plexMono.variable}`}
     >
       <body>
+        <ScrollProgress />
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "#faf8f2" }}>
           <TopBar />
           <Header />
-          {children}
+          <PageTransition>{children}</PageTransition>
           <Footer />
         </div>
+        <ScrollReveals />
       </body>
     </html>
   );

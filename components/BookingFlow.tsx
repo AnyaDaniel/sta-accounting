@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/Icon";
+import Magnetic from "@/components/Magnetic";
 import { SERVICES, SLOTS, PREP_ITEMS } from "@/lib/data";
 
 const inputStyle: React.CSSProperties = {
@@ -34,8 +35,9 @@ export default function BookingFlow() {
 
   return (
     <section style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 28px 90px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,320px)", gap: 44, alignItems: "start" }}>
+      <div className="book-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,320px)", gap: 44, alignItems: "start" }}>
         <form
+          data-reveal
           onSubmit={confirm}
           style={{
             background: "#fff",
@@ -68,6 +70,8 @@ export default function BookingFlow() {
                       color: "#2a1214",
                       border: "1px solid " + (on ? "#6d8a14" : "rgba(42,18,20,.22)"),
                       background: on ? "rgba(165,206,43,.22)" : "#fff",
+                      transition: "border-color .2s ease, background .2s ease, transform .15s ease",
+                      transform: on ? "translateY(-1px)" : "none",
                     }}
                   >
                     {svc.title}
@@ -99,6 +103,8 @@ export default function BookingFlow() {
                       background: on ? "rgba(165,206,43,.22)" : "#fff",
                       color: "#2a1214",
                       textAlign: "left",
+                      transition: "border-color .2s ease, background .2s ease, transform .15s ease",
+                      transform: on ? "translateY(-1px)" : "none",
                     }}
                   >
                     <span style={{ font: "500 10.5px/1.4 var(--font-mono), monospace", letterSpacing: ".1em", opacity: 0.75 }}>{d}</span>
@@ -150,27 +156,30 @@ export default function BookingFlow() {
             </label>
           </div>
 
-          <button
-            type="submit"
-            style={{
-              alignSelf: "flex-start",
-              display: "inline-flex",
-              alignItems: "center",
-              whiteSpace: "nowrap",
-              background: "#3b1517",
-              color: "#faf8f2",
-              padding: "15px 26px",
-              borderRadius: 2,
-              font: "700 14px/1.3 var(--font-sans), sans-serif",
-              cursor: "pointer",
-              border: "none",
-            }}
-          >
-            Confirm booking
-          </button>
+          <Magnetic>
+            <button
+              type="submit"
+              className="btn-animated"
+              style={{
+                alignSelf: "flex-start",
+                display: "inline-flex",
+                alignItems: "center",
+                whiteSpace: "nowrap",
+                background: "#3b1517",
+                color: "#faf8f2",
+                padding: "15px 26px",
+                borderRadius: 2,
+                font: "700 14px/1.3 var(--font-sans), sans-serif",
+                cursor: "pointer",
+                border: "none",
+              }}
+            >
+              Confirm booking
+            </button>
+          </Magnetic>
         </form>
 
-        <aside style={{ display: "flex", flexDirection: "column", gap: 18, position: "sticky", top: 112 }}>
+        <aside className="book-aside" data-reveal data-reveal-delay="0.1" style={{ display: "flex", flexDirection: "column", gap: 18, position: "sticky", top: 112 }}>
           <div style={{ background: "#a5ce2b", borderRadius: 3, padding: "26px 24px" }}>
             <div style={{ font: "500 10.5px/1 var(--font-mono), monospace", letterSpacing: ".18em", color: "#33231b", marginBottom: 14 }}>
               YOUR BOOKING

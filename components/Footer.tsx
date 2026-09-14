@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <footer style={{ marginTop: "auto", background: "#2a1214", color: "#c9bfb4" }}>
       <div
+        data-reveal
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -40,7 +41,7 @@ export default function Footer() {
             SERVICES
           </div>
           {SERVICES.map((svc) => (
-            <Link key={svc.slug} href={`/services/${svc.slug}`} style={{ cursor: "pointer", color: "#c9bfb4" }}>
+            <Link key={svc.slug} href={`/services/${svc.slug}`} className="footer-link" style={{ cursor: "pointer", color: "#c9bfb4" }}>
               {svc.title}
             </Link>
           ))}
@@ -50,10 +51,10 @@ export default function Footer() {
           <div style={{ font: "700 12px/1 var(--font-sans), sans-serif", letterSpacing: ".1em", color: "#faf8f2", marginBottom: 5 }}>
             COMPANY
           </div>
-          <Link href="/" style={{ cursor: "pointer", color: "#c9bfb4" }}>Home</Link>
-          <Link href="/about" style={{ cursor: "pointer", color: "#c9bfb4" }}>About</Link>
-          <Link href="/resources" style={{ cursor: "pointer", color: "#c9bfb4" }}>Resources</Link>
-          <Link href="/book" style={{ cursor: "pointer", color: "#c9bfb4" }}>Book a consultation</Link>
+          <Link href="/" className="footer-link" style={{ cursor: "pointer", color: "#c9bfb4" }}>Home</Link>
+          <Link href="/about" className="footer-link" style={{ cursor: "pointer", color: "#c9bfb4" }}>About</Link>
+          <Link href="/resources" className="footer-link" style={{ cursor: "pointer", color: "#c9bfb4" }}>Resources</Link>
+          <Link href="/book" className="footer-link" style={{ cursor: "pointer", color: "#c9bfb4" }}>Book a consultation</Link>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 9, font: "400 14px/1.5 var(--font-sans), sans-serif" }}>

@@ -9,31 +9,41 @@ export const metadata: Metadata = {
 export default function ResourcesPage() {
   return (
     <main>
-      <section style={{ background: "#3b1517", color: "#f2ede4" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "34px 28px 62px" }}>
-          <div style={{ font: "500 11.5px/1 var(--font-mono), monospace", letterSpacing: ".14em", color: "#a5ce2b", marginBottom: 40 }}>
+      <section style={{ background: "#3b1517", color: "#f2ede4", position: "relative", overflow: "hidden" }}>
+        <div className="dot-grid" />
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "34px 28px 62px", position: "relative" }}>
+          <div data-reveal style={{ font: "500 11.5px/1 var(--font-mono), monospace", letterSpacing: ".14em", color: "#a5ce2b", marginBottom: 40 }}>
             RESOURCES
           </div>
           <h1
+            data-reveal
+            data-reveal-delay="0.08"
             style={{
               margin: "0 0 20px",
-              font: "600 54px/1.08 var(--font-serif), Georgia, serif",
+              fontWeight: 600,
+              fontSize: "clamp(32px, 7vw, 54px)",
+              lineHeight: 1.08,
+              fontFamily: "var(--font-serif), Georgia, serif",
               letterSpacing: "-.02em",
             }}
           >
             Dates, forms and plain-language guides.
           </h1>
-          <p style={{ margin: 0, maxWidth: 620, font: "400 18px/1.7 var(--font-sans), sans-serif", color: "#ded5c9" }}>
+          <p
+            data-reveal
+            data-reveal-delay="0.16"
+            style={{ margin: 0, maxWidth: 620, font: "400 18px/1.7 var(--font-sans), sans-serif", color: "#ded5c9" }}
+          >
             The things clients ask us for most often, kept current for the 2026 filing year.
           </p>
         </div>
       </section>
 
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 28px 30px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,320px)", gap: 48, alignItems: "start" }}>
+        <div className="resources-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,320px)", gap: 48, alignItems: "start" }}>
           <div>
-            <h2 style={{ margin: "0 0 22px", font: "600 28px/1.25 var(--font-serif), Georgia, serif" }}>Key filing deadlines</h2>
-            <div style={{ border: "1px solid rgba(42,18,20,.14)", borderRadius: 3, overflow: "hidden", background: "#fff" }}>
+            <h2 data-reveal style={{ margin: "0 0 22px", font: "600 28px/1.25 var(--font-serif), Georgia, serif" }}>Key filing deadlines</h2>
+            <div data-reveal data-reveal-delay="0.08" style={{ border: "1px solid rgba(42,18,20,.14)", borderRadius: 3, overflow: "hidden", background: "#fff" }}>
               {DEADLINES.map((d, i) => (
                 <div
                   key={d.label}
@@ -53,12 +63,14 @@ export default function ResourcesPage() {
               ))}
             </div>
 
-            <h2 style={{ margin: "44px 0 22px", font: "600 28px/1.25 var(--font-serif), Georgia, serif" }}>Guides &amp; checklists</h2>
+            <h2 data-reveal style={{ margin: "44px 0 22px", font: "600 28px/1.25 var(--font-serif), Georgia, serif" }}>Guides &amp; checklists</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 18 }}>
-              {GUIDES.map((g) => (
+              {GUIDES.map((g, i) => (
                 <div
                   key={g.title}
                   className="hover-lime-border"
+                  data-reveal
+                  data-reveal-delay={(i * 0.08).toFixed(2)}
                   style={{
                     background: "#fff",
                     border: "1px solid rgba(42,18,20,.12)",
@@ -83,7 +95,7 @@ export default function ResourcesPage() {
             </div>
           </div>
 
-          <aside style={{ display: "flex", flexDirection: "column", gap: 18, position: "sticky", top: 112 }}>
+          <aside className="resources-aside" data-reveal style={{ display: "flex", flexDirection: "column", gap: 18, position: "sticky", top: 112 }}>
             <div style={{ background: "#2a1214", color: "#f2ede4", borderRadius: 3, padding: "26px 24px" }}>
               <div style={{ font: "600 21px/1.25 var(--font-serif), Georgia, serif", marginBottom: 8 }}>Client portal</div>
               <p style={{ margin: "0 0 18px", font: "400 14.5px/1.6 var(--font-sans), sans-serif", color: "#c9bfb4" }}>

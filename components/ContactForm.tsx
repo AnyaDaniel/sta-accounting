@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Icon from "@/components/Icon";
+import Magnetic from "@/components/Magnetic";
 import { SERVICES, FIRM } from "@/lib/data";
 
 export default function ContactForm() {
@@ -26,6 +27,7 @@ export default function ContactForm() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 52, alignItems: "start" }}>
         {submitted ? (
           <div
+            className="fade-in-up"
             style={{
               background: "#fff",
               border: "1px solid rgba(42,18,20,.12)",
@@ -36,6 +38,20 @@ export default function ContactForm() {
               gap: 12,
             }}
           >
+            <span
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                background: "rgba(165,206,43,.22)",
+                color: "#4e6a0f",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Icon name="check" size={20} strokeWidth={2} />
+            </span>
             <div style={{ font: "600 24px/1.2 var(--font-serif), Georgia, serif" }}>Message sent.</div>
             <p style={{ margin: 0, font: "400 15.5px/1.6 var(--font-sans), sans-serif", color: "#4a3d3a" }}>
               Thanks, {name || "there"} — we&apos;ll come back to you within one business day.
@@ -43,6 +59,7 @@ export default function ContactForm() {
           </div>
         ) : (
           <form
+            data-reveal
             onSubmit={handleSubmit}
             style={{
               background: "#fff",
@@ -120,48 +137,54 @@ export default function ContactForm() {
                 style={{ ...inputStyle, minHeight: 110, lineHeight: 1.55, resize: "vertical" }}
               />
             </label>
-            <button
-              type="submit"
-              style={{
-                alignSelf: "flex-start",
-                display: "inline-flex",
-                alignItems: "center",
-                whiteSpace: "nowrap",
-                background: "#3b1517",
-                color: "#faf8f2",
-                padding: "14px 24px",
-                borderRadius: 2,
-                font: "700 14px/1.3 var(--font-sans), sans-serif",
-                cursor: "pointer",
-                border: "none",
-              }}
-            >
-              Send message
-            </button>
+            <Magnetic>
+              <button
+                type="submit"
+                className="btn-animated"
+                style={{
+                  alignSelf: "flex-start",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                  background: "#3b1517",
+                  color: "#faf8f2",
+                  padding: "14px 24px",
+                  borderRadius: 2,
+                  font: "700 14px/1.3 var(--font-sans), sans-serif",
+                  cursor: "pointer",
+                  border: "none",
+                }}
+              >
+                Send message
+              </button>
+            </Magnetic>
           </form>
         )}
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div data-reveal data-reveal-delay="0.1" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ background: "#a5ce2b", borderRadius: 3, padding: "28px 26px" }}>
             <div style={{ font: "600 22px/1.25 var(--font-serif), Georgia, serif", color: "#2a1214", marginBottom: 8 }}>Prefer to talk?</div>
             <p style={{ margin: "0 0 18px", font: "400 14.5px/1.6 var(--font-sans), sans-serif", color: "#33231b" }}>
               A 20-minute call is usually enough to scope the work and quote it.
             </p>
-            <Link
-              href="/book"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                background: "#2a1214",
-                color: "#faf8f2",
-                padding: "13px 20px",
-                borderRadius: 2,
-                font: "700 13.5px/1.3 var(--font-sans), sans-serif",
-                cursor: "pointer",
-              }}
-            >
-              Book a consultation
-            </Link>
+            <Magnetic>
+              <Link
+                href="/book"
+                className="btn-animated"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  background: "#2a1214",
+                  color: "#faf8f2",
+                  padding: "13px 20px",
+                  borderRadius: 2,
+                  font: "700 13.5px/1.3 var(--font-sans), sans-serif",
+                  cursor: "pointer",
+                }}
+              >
+                Book a consultation
+              </Link>
+            </Magnetic>
           </div>
 
           <div style={{ border: "1px solid rgba(42,18,20,.12)", borderRadius: 3, padding: 26, display: "flex", flexDirection: "column", gap: 16, background: "#fff" }}>
